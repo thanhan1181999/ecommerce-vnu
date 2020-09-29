@@ -1,5 +1,5 @@
 class Api::ProductsController < ApplicationController
-  before_action :check_param_category
+  before_action :check_param_category, only: [:index, :create]
   def index
     json_response(category.products)
   end
@@ -13,6 +13,8 @@ class Api::ProductsController < ApplicationController
   end
 
   def destroy
+    Product.find(params[:id]).destroy!
+    head :no_content
   end
 
   private
@@ -22,7 +24,7 @@ class Api::ProductsController < ApplicationController
 
   def check_param_category
     json_response(
-      {message: "need have query param category"}, 
+      {message: "this category is not exist"}, 
       :not_acceptable
     ) if category.nil?
   end
