@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, path: 'api', defaults: { format: :json }
+  scope :api do
+    devise_for :users, as: :api, defaults: { format: :json }
+  end
+
   namespace :api do
     get 'product/index'
     get 'product/create'
