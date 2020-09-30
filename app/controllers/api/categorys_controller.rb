@@ -10,7 +10,7 @@ class Api::CategorysController < ApplicationController
 
   def destroy
     Category.destroy(params[:id])
-    json_response(Category.all)
+    head :no_content
   end 
 
   def update
