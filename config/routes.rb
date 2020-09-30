@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   namespace :api do  
     resources :categorys, only: [:index, :create, :destroy, :update]
     resources :products, only: [:index, :create, :destroy, :update]
+    namespace :admin do
+      resources :users
+    end
   end
+  
 end
