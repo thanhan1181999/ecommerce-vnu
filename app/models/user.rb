@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: self
+  has_many :orders, dependent: :destroy
 end

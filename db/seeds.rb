@@ -34,10 +34,22 @@ NUM_USER.times do |n|
   user.save!
 end
 
-# Category.find(2).products.create(
-#   name: "shoe black",
-#   picture: "https://lorempixel.com/200/200",
-#   price: 200000
-# )
+Category.create!(name: "Thời trang nam", 
+  picture: Faker::LoremPixel.image(size:"200x200"))
+Category.create!(name: "Thời trang nữ", 
+  picture: Faker::LoremPixel.image(size:"200x200"))
+Category.create!(name: "Mẹ & bé", 
+  picture: Faker::LoremPixel.image(size:"200x200"))
+
+Category.find(2).products.create(
+  name: "shoe black",
+  picture: "https://lorempixel.com/200/200",
+  price: 200000
+)
+Category.find(2).products.create(
+  name: "shoe red",
+  picture: "https://lorempixel.com/200/200",
+  price: 200000
+)
 
 
