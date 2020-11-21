@@ -2,6 +2,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :product
+  has_one :comment
   
   QUERY = " orders.id,
             orders.product_id, 

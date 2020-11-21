@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :orders, dependent: :destroy
+  has_one :store
+  has_many :carts, dependent: :destroy
 end

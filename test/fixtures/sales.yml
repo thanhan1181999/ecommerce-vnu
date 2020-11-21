@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  promotion: 1
+  quantity: 1
+  from: 2020-11-21
+  to: 2020-11-21
+  products: one
+
+two:
+  promotion: 1
+  quantity: 1
+  from: 2020-11-21
+  to: 2020-11-21
+  products: two
