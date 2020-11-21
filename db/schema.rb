@@ -10,13 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_154137) do
+ActiveRecord::Schema.define(version: 2020_11_21_153456) do
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "users_id", null: false
+    t.integer "products_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "note"
+    t.index ["products_id"], name: "index_carts_on_products_id"
+    t.index ["users_id"], name: "index_carts_on_users_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.string "picture"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "star"
+    t.text "content"
+    t.string "image"
+    t.integer "orders_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["orders_id"], name: "index_comments_on_orders_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -25,18 +46,47 @@ ActiveRecord::Schema.define(version: 2020_10_21_154137) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "state"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "picture"
+    t.string "image"
     t.decimal "price"
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.integer "quantityInStock"
+    t.string "trademark"
+    t.string "origin"
+    t.string "sendFrom"
+    t.integer "stores_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["stores_id"], name: "index_products_on_stores_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.integer "promotion"
+    t.integer "quantity"
+    t.date "from"
+    t.date "to"
+    t.integer "products_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["products_id"], name: "index_sales_on_products_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.text "describe"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,11 +103,18 @@ ActiveRecord::Schema.define(version: 2020_10_21_154137) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jti", null: false
+    t.string "image"
+    t.integer "gender"
+    t.string "address"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "carts", "products", column: "products_id"
+  add_foreign_key "carts", "users", column: "users_id"
+  add_foreign_key "comments", "orders", column: "orders_id"
   add_foreign_key "products", "categories"
+  add_foreign_key "sales", "products", column: "products_id"
 end
