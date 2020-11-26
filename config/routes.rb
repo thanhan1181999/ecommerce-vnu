@@ -11,11 +11,25 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do  
-    resources :categorys, only: [:index, :create, :destroy, :update]
-    resources :products, only: [:index, :create, :destroy, :update]
-    resources :orders, only: [:index, :create, :destroy, :update, :show]
     namespace :admin do
       resources :users
+    end
+    resources :categorys, only: [:index, :create, :destroy, :update]
+    resources :products, only: [:index, :create, :destroy, :update]
+
+    # orders handle
+    namespace :user do
+      get 'orders', to: 'orders#index'
+      post 'orders', to: 'orders#create'
+      patch 'orders/cancel', to: 'orders#cancel'
+      get 'orders/filter', to: 'orders#filter'
+    end
+
+    namespace :store do
+      get 'orders', to: 'orders#index'
+      patch 'orders/accept', to: 'orders#accept'
+      patch 'orders/cancel', to: 'orders#cancel'
+      get 'orders/filter', to: 'orders#filter'
     end
   end
   

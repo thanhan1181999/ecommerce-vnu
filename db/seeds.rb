@@ -28,28 +28,49 @@ NUM_USER.times do |n|
     name: name,
     email: email,
     password: password,
-    password_confirmation: password
+    password_confirmation: password,
+    role: "user"
   )
   user.skip_confirmation!
   user.save!
+  user.create_store!(
+    name: "the gioi di dong"
+  )
 end
 
+admin = User.create!(
+  name: "thuong",
+  email: "17021057@vnu.edu.vn",
+  password: "111111",
+  password_confirmation: "111111",
+  role: "admin"
+)
+admin.skip_confirmation!
+admin.save!
+
+admin.create_store!(
+  name: "linh kien dien tu"
+)
+
+
 Category.create!(name: "Thời trang nam", 
-  picture: Faker::LoremPixel.image(size:"200x200"))
+  image: Faker::LoremPixel.image(size:"200x200"))
 Category.create!(name: "Thời trang nữ", 
-  picture: Faker::LoremPixel.image(size:"200x200"))
+  image: Faker::LoremPixel.image(size:"200x200"))
 Category.create!(name: "Mẹ & bé", 
-  picture: Faker::LoremPixel.image(size:"200x200"))
+  image: Faker::LoremPixel.image(size:"200x200"))
 
 Category.find(2).products.create(
   name: "shoe black",
-  picture: "https://lorempixel.com/200/200",
-  price: 200000
+  image: "https://lorempixel.com/200/200",
+  price: 200000,
+  stores_id: 1
 )
 Category.find(2).products.create(
   name: "shoe red",
-  picture: "https://lorempixel.com/200/200",
-  price: 200000
+  image: "https://lorempixel.com/200/200",
+  price: 200000,
+  stores_id: 1
 )
 
 
