@@ -23,6 +23,13 @@ Rails.application.routes.draw do
       post 'orders', to: 'orders#create'
       patch 'orders/cancel', to: 'orders#cancel'
       get 'orders/filter', to: 'orders#filter'
+
+      # cart
+      post 'carts', to: 'carts#create'
+      get 'carts', to: 'carts#index'
+      delete 'carts', to: 'carts#destroy'
+      get 'carts/filter', to: 'carts#filter'
+      patch 'carts', to: 'carts#update'
     end
 
     namespace :store do

@@ -8,14 +8,14 @@ class Api::User::OrdersController < ApplicationController
   
   def filter
     @orders= current_api_user.orders
-    if params[:id]
-      @orders = @orders.where(id: params[:id])
+    if params[:ids]
+      @orders = @orders.where(id: params[:ids])
     end
     render json: @orders
   end
 
   def create
-    @orders = current_api_user.orders.create(params)
+    @orders = current_api_user.orders.create(@params_create)
     render json: @orders
   end
  
@@ -37,7 +37,7 @@ class Api::User::OrdersController < ApplicationController
             return render plain: "cannot order from your own store", status: 403
           end
         }
-         orders
+        @params_create = orders 
       end
 
       def set_orders

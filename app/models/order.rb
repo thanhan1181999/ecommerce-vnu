@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :product
   has_one :comment
   has_one :store, through: :product
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   QUERY = " orders.*, 
             products.name as product_name,
