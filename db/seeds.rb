@@ -52,7 +52,6 @@ admin.create_store!(
   name: "linh kien dien tu"
 )
 
-
 Category.create!(name: "Thời trang nam", 
   image: Faker::LoremPixel.image(size:"200x200"))
 Category.create!(name: "Thời trang nữ", 
@@ -64,13 +63,13 @@ Category.find(2).products.create(
   name: "shoe black",
   image: "https://lorempixel.com/200/200",
   price: 200000,
-  stores_id: 1
+  store_id: 1
 )
 Category.find(2).products.create(
   name: "shoe red",
   image: "https://lorempixel.com/200/200",
   price: 200000,
-  stores_id: 1
+  store_id: 1
 )
 
 
