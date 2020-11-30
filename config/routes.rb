@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope :api do
-    devise_for :users, as: :api, defaults: { format: :json }
+    devise_for :users, as: :api, defaults: { format: :json }, controllers: {sessions: 'api/authen/sessions'}
   end
 
   namespace :api do
