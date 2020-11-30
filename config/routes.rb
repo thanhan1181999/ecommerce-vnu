@@ -37,6 +37,8 @@ Rails.application.routes.draw do
       patch 'orders/accept', to: 'orders#accept'
       patch 'orders/cancel', to: 'orders#cancel'
       get 'orders/filter', to: 'orders#filter'
+      post '/', to: 'stores#create'
+      delete '/', to: 'stores#destroy'
     end
   end
   

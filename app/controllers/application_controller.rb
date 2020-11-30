@@ -22,4 +22,10 @@ class ApplicationController < ActionController::API
     result
   end
 
+  def add_link_image_to_object(record)
+    obj = record.attributes
+    obj[:link_img] = url_for(record.image) if record.image.attached?
+    obj
+  end
+
 end
