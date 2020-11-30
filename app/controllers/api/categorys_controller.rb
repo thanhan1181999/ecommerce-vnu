@@ -1,13 +1,13 @@
 class Api::CategorysController < ApplicationController
+  skip_before_action :authenticate_api_user!
+
   def index  
     json_response(add_link_image_to_array_object(Category.all))
   end 
 
   def create
     @category = Category.create!(item_params)
-    obj = @category.attributes
-    obj[:link_img]=url_for(@category.image)
-    json_response(obj,:created)
+    json_response(add_link_image_to_object(@category),:created)
   end
 
   def destroy
@@ -19,9 +19,7 @@ class Api::CategorysController < ApplicationController
 
   def update
     @category = Category.find_by!(id: params[:id]).update(item_params)
-    obj = @category.attributes
-    obj[:link_img]=url_for(@category.image)
-    json_response(obj)
+    json_response(add_link_image_to_object(@category))
   end
 
   private
