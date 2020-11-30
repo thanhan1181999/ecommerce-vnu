@@ -18,9 +18,19 @@ class Api::Authen::SessionsController < Devise::SessionsController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
-    attrs = resource.attributes
-    attrs[:jwt] = request.env['warden-jwt_auth.token']
-    respond_with attrs, location: after_sign_in_path_for(resource)
+
+    res = {}
+    res[:id] = resource.id
+    res[:name] = resource.name
+    res[:email] = resource.email
+    res[:image] = resource.image
+    res[:gender] = resource.gender
+    res[:address] = resource.address
+    res[:role] = resource.role
+    res[:jti] = resource.jti
+    res[:token] = request.env['warden-jwt_auth.token']
+
+    respond_with res, location: after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out
