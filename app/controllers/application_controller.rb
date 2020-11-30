@@ -11,4 +11,15 @@ class ApplicationController < ActionController::API
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  def add_link_image_to_array_object(array)
+    result=[]
+    array.each do |x|
+      obj = x.attributes
+      obj[:link_img] = url_for(x.image) if x.image.attached?
+      result += [obj]
+    end
+    result
+  end
+
 end
