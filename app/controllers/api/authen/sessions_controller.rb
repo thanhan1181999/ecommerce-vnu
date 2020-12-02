@@ -23,7 +23,7 @@ class Api::Authen::SessionsController < Devise::SessionsController
     res[:id] = resource.id
     res[:name] = resource.name
     res[:email] = resource.email
-    res[:image] = resource.image
+    res[:image] = url_for(resource.image) if resource.image.attached?
     res[:gender] = resource.gender
     res[:address] = resource.address
     res[:role] = resource.role

@@ -4,4 +4,6 @@ class Product < ApplicationRecord
   has_one :sale
   has_many :orders
   belongs_to :store
+
+  has_many_attached :images
 end

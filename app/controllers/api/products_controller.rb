@@ -1,12 +1,12 @@
 class Api::ProductsController < ApplicationController
   before_action :check_param_category, only: [:index, :create]
   def index
-    json_response(category.products)
+    json_response(add_link_images_to_array_object(category.products))
   end
 
   def create
-    category.products.create(item_params)
-    json_response(category.products, :created)
+    product = category.products.create(item_params)
+    json_response({status: "success"}, :created)
   end
 
   def update
@@ -19,7 +19,8 @@ class Api::ProductsController < ApplicationController
 
   private
   def item_params
-    params.require(:product).permit(:name, :picture, :price)
+    params.require(:product).permit(:name, :price, 
+      :description, :quantityInstock, :trademark, :origin, :sendFrom, images: [])
   end
 
   def check_param_category
