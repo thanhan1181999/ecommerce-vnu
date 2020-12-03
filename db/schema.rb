@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_074703) do
+ActiveRecord::Schema.define(version: 2020_12_03_071024) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_074703) do
   create_table "comments", force: :cascade do |t|
     t.integer "star"
     t.text "content"
+    t.string "image"
     t.integer "orders_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_074703) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+    t.string "image"
     t.decimal "price"
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -91,14 +93,15 @@ ActiveRecord::Schema.define(version: 2020_11_30_074703) do
     t.integer "quantity"
     t.date "from"
     t.date "to"
-    t.integer "products_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["products_id"], name: "index_sales_on_products_id"
+    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "stores", force: :cascade do |t|
     t.string "name"
+    t.string "image"
     t.text "describe"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -120,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_074703) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jti", null: false
+    t.string "image"
     t.integer "gender"
     t.string "address"
     t.string "role"
@@ -134,5 +138,5 @@ ActiveRecord::Schema.define(version: 2020_11_30_074703) do
   add_foreign_key "carts", "users"
   add_foreign_key "comments", "orders", column: "orders_id"
   add_foreign_key "products", "categories"
-  add_foreign_key "sales", "products", column: "products_id"
+  add_foreign_key "sales", "products"
 end
