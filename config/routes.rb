@@ -30,6 +30,10 @@ Rails.application.routes.draw do
       delete 'carts', to: 'carts#destroy'
       get 'carts/filter', to: 'carts#filter'
       patch 'carts', to: 'carts#update'
+
+      # sale
+      get 'sales', to: 'sales#index'
+      get 'sale/:id', to: 'sales#show'
     end
 
     namespace :store do
@@ -39,6 +43,13 @@ Rails.application.routes.draw do
       get 'orders/filter', to: 'orders#filter'
       post '/', to: 'stores#create'
       delete '/', to: 'stores#destroy'
+
+      # sale
+      get 'sales', to: 'sales#index'
+      post 'sales', to: 'sales#create'
+      delete 'sale/:id', to: 'sales#destroy'
+      patch 'sale/:id', to: 'sales#update'
+      get 'sale/:id', to: 'sales#show'
     end
   end
   

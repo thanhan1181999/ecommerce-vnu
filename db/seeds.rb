@@ -1,5 +1,6 @@
 # Generate a bunch of additional users and store
-NUM_USER = 20
+puts "seeding user..."
+NUM_USER = 4
 
 NUM_USER.times do |n|
   name = Faker::Name.name
@@ -13,6 +14,7 @@ NUM_USER.times do |n|
     password_confirmation: password,
     role: "user"
   )
+  user.skip_confirmation_notification!
   user.skip_confirmation!
   user.save!
   user.create_store!(
@@ -22,11 +24,12 @@ end
 
 admin = User.create!(
   name: "thuong",
-  email: "17021057@vnu.edu.vn",
+  email: "170210577@vnu.edu.vn",
   password: "111111",
   password_confirmation: "111111",
   role: "admin"
 )
+admin.skip_confirmation_notification!
 admin.skip_confirmation!
 admin.save!
 admin.create_store!(
@@ -34,8 +37,10 @@ admin.create_store!(
 )
 
 # create category and products ===================================
+puts "seeding category and product..." 
+
 NUM_CATEGORY = 11
-NUM_PRODUCT = 11
+NUM_PRODUCT = 8
 CATE_NAME_ARRAY = ["Thời trang nam",
 "Điện thoại và phụ kiện",
 "Thiết bị điện tử",
@@ -54,7 +59,7 @@ NUM_CATEGORY.times do |n|
     filename: Faker::Name.name
   )
   NUM_PRODUCT.times do |m|
-    product = cate.products.create(
+    product = cate.products.create!(
       name: Faker::Commerce.product_name,
       price: Faker::Number.within(range: 10000..1000000),
       description: Faker::Lorem.sentence(word_count: 3),
@@ -62,16 +67,22 @@ NUM_CATEGORY.times do |n|
       trademark: Faker::Lorem.word,
       origin: Faker::Space.agency,
       sendFrom: Faker::Marketing.buzzwords,
-      store_id: Faker::Number.within(range: 1..20)
+      store_id: Faker::Number.within(range: 1..NUM_USER)
     )
     product.images.attach(
       io: File.open("storage/products/#{m+1}"),
       filename: Faker::Commerce.product_name
     )
     product.images.attach(
-      io: File.open("storage/products/#{m+1}"),
+      io: File.open("storage/products/#{m+2}"),
       filename: Faker::Commerce.product_name
     )
+    sale_data = {promotion: Faker::Number.within(range: 1..100),
+            quantity: Faker::Number.within(range: 10..5000),
+            from: Date.today,
+            to: Faker::Date.forward(days: 23)
+          }
+    product.create_sale!(sale_data)
   end
 end
 
