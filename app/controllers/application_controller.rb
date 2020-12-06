@@ -43,4 +43,13 @@ class ApplicationController < ActionController::API
     obj
   end
 
+  def add_link_images_to_object(record)
+    obj = record.attributes
+    obj[:link_img]=[]
+    0.upto(record.images.length()-1) do |i|
+      obj[:link_img] += [url_for(record.images[i])]
+    end
+    obj
+  end
+
 end

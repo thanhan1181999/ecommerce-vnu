@@ -1,9 +1,17 @@
 class Api::CategorysController < ApplicationController
   skip_before_action :authenticate_api_user!
 
-  def index  
-    json_response(add_link_image_to_array_object(Category.all))
-  end 
+  def index
+    categorys = Category.all
+    result=[]
+    categorys.each do |category|
+      products = category.products
+      x = add_link_image_to_object(category)
+      x[:products] = add_link_images_to_array_object(products)
+      result += [x]
+    end
+    json_response(result)
+  end
 
   def create
     @category = Category.create!(item_params)
