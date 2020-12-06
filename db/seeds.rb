@@ -53,7 +53,7 @@ CATE_NAME_ARRAY = ["Thời trang nam",
 "Giày dép nữ",
 "Nhà sách"]
 NUM_CATEGORY.times do |n|
-  cate = Category.create(name:CATE_NAME_ARRAY[n])
+  cate = Category.create!(name:CATE_NAME_ARRAY[n])
   cate.image.attach(
     io: File.open("storage/category/#{n+1}"),
     filename: Faker::Name.name

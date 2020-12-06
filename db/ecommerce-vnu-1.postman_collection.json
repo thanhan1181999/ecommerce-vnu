@@ -1,0 +1,1030 @@
+{
+	"info": {
+		"_postman_id": "50427074-c2d9-4002-a656-dbacc19ad3c8",
+		"name": "ecommerce-vnu-1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "sign_in",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"api_user\": {\n        \"email\": \"2example@example.com\",\n        \"password\": \"111111\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/sign_in",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"api_user\": {\n        \"name\":\"thuong\",\n        \"email\": \"333example@example.com\",\n        \"password\": \"111111\",\n        \"password_confirmation\": \"111111\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwN2VkZjJkOC0zY2FmLTRmNmMtODVmZi1kOTU3Yjc3OTdmMjQiLCJzdWIiOiIyMyIsInNjcCI6ImFwaV91c2VyIiwiYXVkIjpudWxsLCJpYXQiOjE2MDE0ODEwMzQsImV4cCI6MTYwMTQ4NDYzNH0.al9xrjvpbSqTp_3mNN32T91tTRB-xvK3UcMydb-yImU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5YmEzMDNiOS03OWI3LTQ0YWItODk3ZS03ZWUzNDVhOThlYjgiLCJzdWIiOiIxIiwic2NwIjoiYXBpX3VzZXIiLCJhdWQiOm51bGwsImlhdCI6MTYwMTQxMTcxNiwiZXhwIjoxNjAxNDE1MzE2fQ.MRf9dKcf6xGLB6s-c6AC5L8L6dQ8YaaqdzLOyXPyBCk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"api_user\": {\n        \"password\": \"111111\",\n        \"password_confirmation\": \"111111\",\n        \"current_password\": \"111111\",\n        \"name\": \"thuong\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot_password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzNWExOTg2Mi00YjQwLTQ4MzEtYTBlMi1mM2FmNmM1ZGY2NDciLCJzdWIiOiIxIiwic2NwIjoiYXBpX3VzZXIiLCJhdWQiOm51bGwsImlhdCI6MTYwMTQ3MzcwMSwiZXhwIjoxNjAxNDc3MzAxfQ.7wLMwFoPQ98OZHctkb8ipxtS7KagH8kkzPFWKdIXgYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"api_user\": {\n        \"email\": \"1example@example.com\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "categorys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/categorys",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categorys"
+							]
+						},
+						"description": "lấy ra list tất cả các category kèm theo sp....không cần body..........cho ra tất cả category kèm sản phẩm tương ứng đính kèm"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/categorys/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categorys",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"id": "56fe6b1b-3b09-4772-b5ce-c398a018c51b",
+									"key": "id",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
+						"description": "xóa category... ko cần body"
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category[image]",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "category[name]",
+									"value": "du lich",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categorys",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categorys"
+							]
+						},
+						"description": "tạo 1 category.........body trong form-data..."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "get Pro of Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products?category=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "2"
+								}
+							]
+						},
+						"description": "lấy ra tất cả sp của 1 category.... ko cần body"
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "thêm params id vào link"
+					},
+					"response": []
+				},
+				{
+					"name": "new product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"giày sneaker\",\n    \"picture\":\"https://lorempixel.com/200/200\",\n    \"price\":300000\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products?category=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "get orders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/user/orders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orders\": [\n    {\n        \"product_id\":1,\n        \"quantity\": 1\n        \n    },\n    {\n       \"product_id\":2,\n       \"quantity\":2\n    }\n]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/user/orders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{     \n   \"ids\": [5,6]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/user/orders/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"orders",
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/user/orders/filter?ids[]=4&ids[]=5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"orders",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "ids[]",
+											"value": "4"
+										},
+										{
+											"key": "ids[]",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "store",
+					"item": [
+						{
+							"name": "get orders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/store/orders",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accept",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ids\":[1,2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/store/orders/accept",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"orders",
+										"accept"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{     \n   \"ids\": [5,6]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/store/orders/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"orders",
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/store/orders/filter?id[]=4&id[]=0",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"orders",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "id[]",
+											"value": "4"
+										},
+										{
+											"key": "id[]",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "carts",
+			"item": [
+				{
+					"name": "create carts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"carts\": [\n        {\n            \"product_id\": 1,\n            \"quantity\": 1\n        },\n        {\n            \"product_id\": 2,\n            \"quantity\": 2\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/carts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/user/carts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete carts",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\": [7,8]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/carts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update cart",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"carts\": [\n        {   \"id\":8,\n            \"product_id\": 1,\n            \"quantity\": -5\n        },\n        {   \"id\":199,\n            \"product_id\": 2,\n            \"quantity\": 2\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/carts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/user/carts/filter?ids[]=7&ids[]=8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"carts",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "ids[]",
+									"value": "7"
+								},
+								{
+									"key": "ids[]",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "sale",
+			"item": [
+				{
+					"name": "store",
+					"item": [
+						{
+							"name": "create sale",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_id\": 2,\n    \"promotion\": 40,\n    \"quantity\": 40,\n    \"from\": \"2020-12-03\",\n    \"to\": \"2020-12-30\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/store/sales",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sales"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get sale of store",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/store/sales",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sales"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/store/sale/22",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sale",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"promotion\": 30,\n    \"quantity\": 40,\n    \"from\": \"2020-12-03\",\n    \"to\": \"2020-12-30\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/store/sale/23",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sale",
+										"23"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/store/sale/23",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sale",
+										"23"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "get all sale",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/user/sales",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"sales"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/store/sale/23",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"store",
+										"sale",
+										"23"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "store",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "store[name]",
+									"value": "store an\n",
+									"type": "text"
+								},
+								{
+									"key": "store[describe]",
+									"value": "mô tả\n",
+									"type": "text"
+								},
+								{
+									"key": "store[image]",
+									"type": "file",
+									"src": "/home/mran/Downloads/abc7.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"store"
+							]
+						},
+						"description": "tạo mới một cưar hàng..............cần 3 trường trong body/form-data"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/store",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"store"
+							]
+						},
+						"description": "xóa cửa hàng của người dùng hiện thời............\nko cần body"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzOGU4YzVlMi04OWZhLTRjN2YtYmZmMy0zZDFiZjlmM2Y4MzQiLCJzdWIiOiIyIiwic2NwIjoiYXBpX3VzZXIiLCJhdWQiOm51bGwsImlhdCI6MTYwNzI2ODM3NywiZXhwIjoxNjA3MjcxOTc3fQ.GXJ1I0iszi27lJqIiOJDcUfAVU6-2qR4XCA9utib2hA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ac23326a-1931-4d72-b85f-4e513404fcde",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "eac34aeb-0c5e-4a2d-baf5-948d30aa881c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
