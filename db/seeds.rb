@@ -1,37 +1,37 @@
 # Generate a bunch of additional users and store
-# NUM_USER = 20
+NUM_USER = 20
 
-# NUM_USER.times do |n|
-#   name = Faker::Name.name
-#   email = "#{n + 1}example@example.com"
-#   password = '111111'
+NUM_USER.times do |n|
+  name = Faker::Name.name
+  email = "#{n + 1}example@example.com"
+  password = '111111'
 
-#   user = User.create!(
-#     name: name,
-#     email: email,
-#     password: password,
-#     password_confirmation: password,
-#     role: "user"
-#   )
-#   user.skip_confirmation!
-#   user.save!
-#   user.create_store!(
-#     name: Faker::Company.name
-#   )
-# end
+  user = User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    role: "user"
+  )
+  user.skip_confirmation!
+  user.save!
+  user.create_store!(
+    name: Faker::Company.name
+  )
+end
 
-# admin = User.create!(
-#   name: "thuong",
-#   email: "17021057@vnu.edu.vn",
-#   password: "111111",
-#   password_confirmation: "111111",
-#   role: "admin"
-# )
-# admin.skip_confirmation!
-# admin.save!
-# admin.create_store!(
-#   name: Faker::Company.name
-# )
+admin = User.create!(
+  name: "thuong",
+  email: "17021057@vnu.edu.vn",
+  password: "111111",
+  password_confirmation: "111111",
+  role: "admin"
+)
+admin.skip_confirmation!
+admin.save!
+admin.create_store!(
+  name: Faker::Company.name
+)
 
 # create category and products ===================================
 NUM_CATEGORY = 11
