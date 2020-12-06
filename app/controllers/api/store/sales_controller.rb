@@ -1,4 +1,5 @@
 class Api::Store::SalesController < ApplicationController
+
   def index
     render json: current_api_user.store.sales
   end

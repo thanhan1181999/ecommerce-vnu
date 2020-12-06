@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
   create_table "comments", force: :cascade do |t|
     t.integer "star"
     t.text "content"
+    t.string "image"
     t.integer "orders_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+    t.string "image"
     t.decimal "price"
     t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
 
   create_table "stores", force: :cascade do |t|
     t.string "name"
+    t.string "image"
     t.text "describe"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -120,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jti", null: false
+    t.string "image"
     t.integer "gender"
     t.string "address"
     t.string "role"
