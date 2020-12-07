@@ -4,4 +4,5 @@ class Store < ApplicationRecord
   has_many :orders, through: :products
   has_one_attached :image
   has_many :sales, through: :products
+  has_many :products, dependent: :destroy
 end

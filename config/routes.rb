@@ -10,12 +10,14 @@ Rails.application.routes.draw do
     get 'product/destroy'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  namespace :api do  
+  namespace :api do
+    get '/home', to: 'products#home'
+
     namespace :admin do
       resources :users
     end
     resources :categorys, only: [:index, :create, :destroy, :update]
-    resources :products, only: [:index, :create, :destroy, :update]
+    resources :products, only: [:index, :create, :destroy, :update, :show]
 
     # orders handle
     namespace :user do
