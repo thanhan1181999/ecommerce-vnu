@@ -52,4 +52,10 @@ class ApplicationController < ActionController::API
     obj
   end
 
+  def attach_sale(product)
+    x = add_link_images_to_object(product)
+    x[:sale] = product.sale
+    x
+  end
+  
 end
