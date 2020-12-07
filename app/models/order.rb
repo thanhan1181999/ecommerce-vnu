@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :product
-  has_one :comment
+  has_one :comment, dependent: :destroy
   has_one :store, through: :product
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 

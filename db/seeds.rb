@@ -1,46 +1,7 @@
-# Generate a bunch of additional users and store
-puts "seeding user..."
+
 NUM_USER = 4
-
-NUM_USER.times do |n|
-  name = Faker::Name.name
-  email = "#{n + 1}example@example.com"
-  password = '111111'
-
-  user = User.create!(
-    name: name,
-    email: email,
-    password: password,
-    password_confirmation: password,
-    role: "user"
-  )
-  user.skip_confirmation_notification!
-  user.skip_confirmation!
-  user.save!
-  user.create_store!(
-    name: Faker::Company.name
-  )
-end
-
-admin = User.create!(
-  name: "thuong",
-  email: "170210577@vnu.edu.vn",
-  password: "111111",
-  password_confirmation: "111111",
-  role: "admin"
-)
-admin.skip_confirmation_notification!
-admin.skip_confirmation!
-admin.save!
-admin.create_store!(
-  name: Faker::Company.name
-)
-
-# create category and products ===================================
-puts "seeding category and product..." 
-
 NUM_CATEGORY = 11
-NUM_PRODUCT = 8
+NUM_PRODUCT = 4
 CATE_NAME_ARRAY = ["Thời trang nam",
 "Điện thoại và phụ kiện",
 "Thiết bị điện tử",
@@ -52,12 +13,41 @@ CATE_NAME_ARRAY = ["Thời trang nam",
 "Thời trang nữ",
 "Giày dép nữ",
 "Nhà sách"]
+
+# need create store before create product
+puts "seeding user and store........."
+
+NUM_USER.times do |n|
+  name = Faker::Name.name
+  email = "#{n + 1}@example.com"
+  password = '111111'
+  user = User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    role: "user"
+  )
+  user.skip_confirmation_notification!
+  user.skip_confirmation!
+  user.save!
+  user.create_store!(
+    name: Faker::Company.name,
+    describe: Faker::Lorem.sentence(word_count: 10)
+  )
+end
+
+# create category and products ===================================
+puts "seeding category and product..." 
+
 NUM_CATEGORY.times do |n|
+  #seed category
   cate = Category.create!(name:CATE_NAME_ARRAY[n])
   cate.image.attach(
     io: File.open("storage/category/#{n+1}"),
     filename: Faker::Name.name
   )
+  #seed product of this category
   NUM_PRODUCT.times do |m|
     product = cate.products.create!(
       name: Faker::Commerce.product_name,
@@ -77,13 +67,75 @@ NUM_CATEGORY.times do |n|
       io: File.open("storage/products/#{m+2}"),
       filename: Faker::Commerce.product_name
     )
+    # seed product sale
     sale_data = {promotion: Faker::Number.within(range: 1..100),
-            quantity: Faker::Number.within(range: 10..5000),
+            quantity: Faker::Number.within(range: 10..200),
             from: Date.today,
             to: Faker::Date.forward(days: 23)
           }
     product.create_sale!(sale_data)
   end
 end
+
+# Generate a bunch of additional users and store
+puts "seeding user with cart and order ..."
+
+NUM_USER.times do |n|
+  name = Faker::Name.name
+  email = "#{n + 1}example@example.com"
+  password = '111111'
+
+  user = User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    role: "user"
+  )
+  user.skip_confirmation_notification!
+  user.skip_confirmation!
+  user.save!
+  user.create_store!(
+    name: Faker::Company.name,
+    describe: Faker::Lorem.sentence(word_count: 10)
+  )
+  user.carts.create!(
+    product_id: Faker::Number.within(range: 1..NUM_PRODUCT),
+    quantity: Faker::Number.within(range: 1..10)
+  )
+  user.orders.create!(
+    product_id: Faker::Number.within(range: 1..NUM_PRODUCT),
+    quantity: Faker::Number.within(range: 1..10),
+    note: Faker::Lorem.sentence(word_count: 5)
+  )
+  comment = user.orders[0].create_comment!(
+    star: Faker::Number.within(range: 1..5),
+    content: Faker::Lorem.sentence(word_count: 5)
+  )
+end
+
+admin = User.create!(
+  name: "thuong",
+  email: "170210577@vnu.edu.vn",
+  password: "111111",
+  password_confirmation: "111111",
+  role: "admin"
+)
+admin.skip_confirmation_notification!
+admin.skip_confirmation!
+admin.save!
+admin.carts.create!(
+  product_id: Faker::Number.within(range: 1..NUM_PRODUCT),
+  quantity: Faker::Number.within(range: 1..10)
+)
+admin.create_store!(
+  name: Faker::Company.name,
+  describe: Faker::Lorem.sentence(word_count: 10)
+)
+
+
+
+
+
 
 
