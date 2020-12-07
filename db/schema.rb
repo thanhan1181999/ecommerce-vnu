@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_071024) do
+ActiveRecord::Schema.define(version: 2020_12_07_075048) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
     t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "note"
     t.index ["product_id"], name: "index_carts_on_product_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
@@ -53,10 +52,10 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
   create_table "comments", force: :cascade do |t|
     t.integer "star"
     t.text "content"
-    t.integer "orders_id", null: false
+    t.integer "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["orders_id"], name: "index_comments_on_orders_id"
+    t.index ["order_id"], name: "index_comments_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -66,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state", default: "waiting_accept"
+    t.text "note"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_071024) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "users"
-  add_foreign_key "comments", "orders", column: "orders_id"
+  add_foreign_key "comments", "orders"
   add_foreign_key "products", "categories"
   add_foreign_key "sales", "products"
 end

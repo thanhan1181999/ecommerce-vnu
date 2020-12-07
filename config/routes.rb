@@ -3,12 +3,6 @@ Rails.application.routes.draw do
     devise_for :users, as: :api, defaults: { format: :json }, controllers: {sessions: 'api/authen/sessions'}
   end
 
-  namespace :api do
-    get 'product/index'
-    get 'product/create'
-    get 'product/update'
-    get 'product/destroy'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do
     get '/home', to: 'products#home'
@@ -36,6 +30,10 @@ Rails.application.routes.draw do
       # sale
       get 'sales', to: 'sales#index'
       get 'sale/:id', to: 'sales#show'
+      # comments
+      post 'comments', to: 'comments#create'
+      get 'comments/:id', to: 'comments#show'
+      delete 'comments', to: 'comments#destroy'
     end
 
     namespace :store do
@@ -45,6 +43,7 @@ Rails.application.routes.draw do
       get 'orders/filter', to: 'orders#filter'
       post '/', to: 'stores#create'
       delete '/', to: 'stores#destroy'
+      put '/', to: 'stores#update'
 
       # sale
       get 'sales', to: 'sales#index'

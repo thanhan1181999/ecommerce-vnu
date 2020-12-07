@@ -34,11 +34,25 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    product = current_api_user.store.products.create!(item_params)
-    json_response({status: "Create success"}, :created)
+    if current_api_user.nil?
+      json_response({alert: "must login"})
+    elsif current_api_user.store.nil?
+      json_response({alert: "must create the store"}) 
+    else
+      product = current_api_user.store.products.create!(item_params)
+      json_response({status: "Create success"}, :created)
+    end
   end
 
   def update
+    product = Product.find_by!(id: params[:id])
+    if product.store.user.id == current_api_user.id
+      Product.find_by!(id: params[:id]).update(item_params)
+      product = Product.find_by!(id: params[:id])
+      json_response(add_link_images_to_object(product))
+    else
+      json_response({alert:"you can not update this product"})
+    end
   end
 
   def destroy
