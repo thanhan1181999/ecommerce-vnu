@@ -58,7 +58,7 @@ NUM_CATEGORY.times do |n|
       trademark: Faker::Lorem.word,
       origin: Faker::Space.agency,
       sendFrom: Faker::Marketing.buzzwords,
-      store_id: Faker::Number.within(range: 1..NUM_USER)
+      store_id: User.first.store.id
     )
     product.images.attach(
       io: File.open("storage/products/#{m+1}"),
