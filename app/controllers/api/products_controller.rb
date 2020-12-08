@@ -2,7 +2,7 @@ class Api::ProductsController < ApplicationController
   skip_before_action :authenticate_api_user!
   
   before_action :check_param_category, only: [:index]
-
+  before_action :authenticate_api_user!, only: [:create, :update, :destroy]
   def home
     categorys = add_link_image_to_array_object(Category.all)
     products_1 = add_link_images_to_array_object(Product.limit(6).offset(0))
@@ -34,9 +34,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    if current_api_user.nil?
-      json_response({alert: "must login"})
-    elsif current_api_user.store.nil?
+    if current_api_user.store.nil?
       json_response({alert: "must create the store"}) 
     else
       product = current_api_user.store.products.create!(item_params)
@@ -56,8 +54,13 @@ class Api::ProductsController < ApplicationController
   end
 
   def destroy
-    Product.find(params[:id]).destroy!
-    json_response({alert: "Delete success"})
+    pr = current_api_user.store.products.where(id: params[:id])[0]
+    unless pr.nil?
+      pr.destroy
+      json_response({alert: "Delete success"})
+    else
+      json_response({alert: "you donot have product with id = #{params[:id]}"})
+    end
   end
 
   private
