@@ -26,7 +26,8 @@ NUM_USER.times do |n|
     email: email,
     password: password,
     password_confirmation: password,
-    role: "user"
+    role: "user",
+    address: Faker::Address.full_address
   )
   user.skip_confirmation_notification!
   user.skip_confirmation!
@@ -90,7 +91,8 @@ NUM_USER.times do |n|
     email: email,
     password: password,
     password_confirmation: password,
-    role: "user"
+    role: "user",
+    address: Faker::Address.full_address
   )
   user.skip_confirmation_notification!
   user.skip_confirmation!
@@ -119,7 +121,8 @@ admin = User.create!(
   email: "170210577@vnu.edu.vn",
   password: "111111",
   password_confirmation: "111111",
-  role: "admin"
+  role: "admin",
+  address: Faker::Address.full_address
 )
 admin.skip_confirmation_notification!
 admin.skip_confirmation!
