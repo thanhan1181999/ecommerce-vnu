@@ -32,9 +32,11 @@ class Api::User::OrdersController < ApplicationController
 
     # cannot order from your own store
     orders = p[:orders]
-    orders.each do |o|
-      if current_api_user.store.id == Product.find(o[:product_id]).store.id
-        return render plain: 'cannot order from your own store', status: 403
+    unless current_api_user.store.nil? 
+      orders.each do |o|
+        if current_api_user.store.id == Product.find(o[:product_id]).store.id
+          return render plain: 'cannot order from your own store', status: 403
+        end
       end
     end
     @params_create = orders
