@@ -1,0 +1,12 @@
+default: &default
+  PAYPAL_ENV: sandbox
+  STRIPE_PUBLISHABLE_KEY: pk_test_51Hw4XuEaT3i1Fi3gnbdFnWFdJ2IyokLHfS7ZahO264ub29Xw9NIzn1am4Gk5SYILheDsOka7jldcIxeVIGdea7tp00EQ10Ealc
+  STRIPE_SECRET_KEY: sk_test_51Hw4XuEaT3i1Fi3gqTgs5XQ2MIvpz0ae64AjH4Suj9d6J0tvYcoij5IFUToVqUEFxeT9bYrANXCVYTC2lIJeXXjJ0069JWDsGc
+  PAYPAL_CLIENT_ID: PAYPAL_CLIENT_ID
+  PAYPAL_SECRET_KEY: PAYPAL_SECRET_KEY
+
+test:
+  <<: *default
+
+development:
+  <<: *default
