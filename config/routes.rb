@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       delete 'carts', to: 'carts#destroy'
       get 'carts/filter', to: 'carts#filter'
       patch 'carts', to: 'carts#update'
+      put 'carts/:id', to: 'carts#update1'
 
       # sale
       get 'sales', to: 'sales#index'

@@ -46,7 +46,23 @@ class Api::User::CartsController < ApplicationController
     render json: res
   end
 
+  def update1
+    cart = current_api_user.carts.where(id: params[:id])[0]
+    unless cart.nil?
+      if cart.update(item_params)
+        json_response(Cart.find_by(id: params[:id]))
+      else
+        json_response({status: "falsed"})
+      end
+    else
+      json_response({status: "you do not have this cart"})
+    end
+  end
+
     private
+      def item_params
+        params.require(:cart).permit(:quantity)
+      end
       def params_create
         p = params.permit(carts: [:product_id, :quantity])
         p = p[:carts]
