@@ -54,6 +54,11 @@ class ApplicationController < ActionController::API
 
   def attach_sale(product)
     x = add_link_images_to_object(product)
+    x[:comments] = product.orders.map do |order|
+      c = order.comment.attributes
+      c[:username] = order.user.name
+      c
+    end
     x[:sale] = product.sale
     x
   end
