@@ -1,4 +1,7 @@
 class Api::Store::StoresController < ApplicationController
+
+  skip_before_action :authenticate_api_user!, only: [:show]
+
   def create
     if current_api_user.store.nil?
       @store = current_api_user.create_store!(store_params)
@@ -26,6 +29,15 @@ class Api::Store::StoresController < ApplicationController
       json_response(@store)
     else
       json_response({alert:"you do not haved a store to delete"})
+    end
+  end
+
+  def show
+    store = Store.find_by(id: params[:id])
+    if store.nil?
+      json_response({alert:"do not have a store with id = #{params[:id]}"})
+    else
+      json_response(add_link_image_to_object(store))
     end
   end
 

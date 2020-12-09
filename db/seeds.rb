@@ -32,9 +32,13 @@ NUM_USER.times do |n|
   user.skip_confirmation_notification!
   user.skip_confirmation!
   user.save!
-  user.create_store!(
+  store = user.create_store!(
     name: Faker::Company.name,
     describe: Faker::Lorem.sentence(word_count: 10)
+  )
+  store.image.attach(
+    io: File.open("storage/products/#{n+1}"),
+    filename: Faker::Commerce.product_name
   )
 end
 

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       post '/', to: 'stores#create'
       delete '/', to: 'stores#destroy'
       put '/', to: 'stores#update'
+      get '/:id', to: 'stores#show' 
 
       # sale
       get 'sales', to: 'sales#index'

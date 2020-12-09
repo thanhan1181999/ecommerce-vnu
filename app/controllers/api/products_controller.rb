@@ -1,7 +1,6 @@
 class Api::ProductsController < ApplicationController
   skip_before_action :authenticate_api_user!
-  
-  before_action :check_param_category, only: [:index]
+
   before_action :authenticate_api_user!, only: [:create, :update, :destroy]
   def home
     categorys = add_link_image_to_array_object(Category.all)
@@ -30,7 +29,13 @@ class Api::ProductsController < ApplicationController
   end
 
   def index
-    json_response(add_link_images_to_array_object(category.products))
+    if !category.nil?
+      json_response(add_link_images_to_array_object(category.products))
+    elsif !store.nil?
+      json_response(add_link_images_to_array_object(store.products))
+    else
+      json_response({status: "no have category or store"})
+    end
   end
 
   def create
@@ -70,14 +75,11 @@ class Api::ProductsController < ApplicationController
       :category_id, :sendFrom, images: [])
   end
 
-  def check_param_category
-    json_response(
-      {message: "this category is not exist"}, 
-      :not_acceptable
-    ) if category.nil?
-  end
-
   def category
     Category.find_by(id: params[:category])
+  end
+
+  def store
+    Store.find_by(id: params[:store])
   end
 end
