@@ -11,4 +11,17 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
 
   has_one_attached :image
+
+  def as_json(_options = {})
+    res = {}
+    res[:id] = self.id
+    res[:name] = self.name
+    res[:email] = self.email
+    res[:image] = get_url_image(self)
+    res[:gender] = self.gender
+    res[:address] = self.address
+    res[:role] = self.role
+    res[:jti] = self.jti
+    res
+  end
 end

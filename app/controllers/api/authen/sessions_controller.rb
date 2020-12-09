@@ -19,18 +19,7 @@ class Api::Authen::SessionsController < Devise::SessionsController
     sign_in(resource_name, resource)
     yield resource if block_given?
 
-    res = {}
-    res[:id] = resource.id
-    res[:name] = resource.name
-    res[:email] = resource.email
-    res[:image] = url_for(resource.image) if resource.image.attached?
-    res[:gender] = resource.gender
-    res[:address] = resource.address
-    res[:role] = resource.role
-    res[:jti] = resource.jti
-    res[:token] = request.env['warden-jwt_auth.token']
-
-    respond_with res, location: after_sign_in_path_for(resource)
+    respond_with user_res(resource), location: after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out

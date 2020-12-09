@@ -9,4 +9,10 @@ class ApplicationRecord < ActiveRecord::Base
     end
     rs
   end
+
+  def get_url_image(pro)
+    return unless pro.image.attached?
+
+    Rails.application.routes.url_helpers.url_for(pro.image)
+  end
 end
