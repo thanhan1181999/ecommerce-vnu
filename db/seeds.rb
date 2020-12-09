@@ -27,6 +27,7 @@ NUM_USER.times do |n|
     password_confirmation: password,
     role: 'user',
     address: Faker::Address.full_address,
+    phone: Faker::PhoneNumber.cell_phone_in_e164,
     gender: 'nam'
   )
   user.skip_confirmation_notification!

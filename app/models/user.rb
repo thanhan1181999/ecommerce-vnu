@@ -20,6 +20,7 @@ class User < ApplicationRecord
     res[:image] = get_url_image(self)
     res[:gender] = self.gender
     res[:address] = self.address
+    res[:phone] = self.phone
     res[:role] = self.role
     res[:jti] = self.jti
     res
