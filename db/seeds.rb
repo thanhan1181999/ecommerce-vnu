@@ -39,6 +39,7 @@ NUM_USER.times do |n|
   store.image.attach(
     io: File.open("storage/products/#{n+1}"),
     filename: Faker::Commerce.product_name
+  )
   user.image.attach(
     io: File.open("images/avatar/1.jpeg"),
     filename: Faker::Name.name
