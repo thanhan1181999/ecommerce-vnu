@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope :api do
-    devise_for :users, as: :api, defaults: { format: :json }, controllers: {sessions: 'api/authen/sessions'}
+    devise_for :users, as: :api, defaults: { format: :json }, controllers: { sessions: 'api/authen/sessions',
+                                                                             registrations: 'api/authen/registrations' }
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -10,11 +11,11 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users
     end
-    resources :categorys, only: [:index, :create, :destroy, :update]
-    resources :products, only: [:index, :create, :destroy, :update, :show]
+    resources :categorys, only: %i[index create destroy update]
+    resources :products, only: %i[index create destroy update show]
 
-    # orders handle
     namespace :user do
+      # orders handle
       get 'orders', to: 'orders#index'
       post 'orders', to: 'orders#create'
       patch 'orders/cancel', to: 'orders#cancel'
@@ -35,6 +36,10 @@ Rails.application.routes.draw do
       post 'comments', to: 'comments#create'
       get 'comments/:id', to: 'comments#show'
       delete 'comments', to: 'comments#destroy'
+
+      # profile handler
+      get '/profile', to: 'profile#profile'
+      patch '/profile', to: 'profile#update'
     end
 
     namespace :store do
@@ -55,5 +60,4 @@ Rails.application.routes.draw do
       get 'sale/:id', to: 'sales#show'
     end
   end
-  
 end

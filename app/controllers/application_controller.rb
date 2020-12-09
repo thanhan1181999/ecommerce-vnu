@@ -66,4 +66,17 @@ class ApplicationController < ActionController::API
     x
   end
   
+  def user_res(resource)
+    res = {}
+    res[:id] = resource.id
+    res[:name] = resource.name
+    res[:email] = resource.email
+    res[:image] = url_for(resource.image) if resource.image.attached?
+    res[:gender] = resource.gender
+    res[:address] = resource.address
+    res[:role] = resource.role
+    res[:jti] = resource.jti
+    res[:token] = request.env['warden-jwt_auth.token']
+    res
+  end
 end
