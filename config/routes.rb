@@ -47,10 +47,15 @@ Rails.application.routes.draw do
       patch 'orders/accept', to: 'orders#accept'
       patch 'orders/cancel', to: 'orders#cancel'
       get 'orders/filter', to: 'orders#filter'
+
       post '/', to: 'stores#create'
       delete '/', to: 'stores#destroy'
       put '/', to: 'stores#update'
-      get '/:id', to: 'stores#show' 
+      get '/', to: 'stores#current_store'
+
+      get '/:id', to: 'stores#show'
+
+      get 'products/getAll', to: 'stores#products'
 
       # sale
       get 'sales', to: 'sales#index'

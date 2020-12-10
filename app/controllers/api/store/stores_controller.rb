@@ -41,6 +41,22 @@ class Api::Store::StoresController < ApplicationController
     end
   end
 
+  def current_store
+    unless current_api_user.store.nil?
+      json_response(add_link_image_to_object(current_api_user.store))
+    else
+      json_response({alert:"you do not created a store"})
+    end
+  end
+
+  def products
+    unless current_api_user.store.nil?
+      json_response(add_link_images_to_array_object(current_api_user.store.products))
+    else
+      json_response({alert:"you do not created a store, so do not have product"})
+    end
+  end
+
   def store_params
     params.require(:store).permit(:name, :image, :describe)
   end
