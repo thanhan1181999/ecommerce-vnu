@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'orders', to: 'orders#index'
       post 'orders', to: 'orders#create'
       patch 'orders/cancel', to: 'orders#cancel'
+      patch 'orders/success', to: 'orders#success'
       get 'orders/filter', to: 'orders#filter'
 
       # cart

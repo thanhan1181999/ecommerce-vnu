@@ -1,5 +1,5 @@
 class Api::User::OrdersController < ApplicationController
-  before_action :set_orders, only: %i[index filter cancel]
+  before_action :set_orders, only: %i[index filter cancel success]
   before_action :set_params_create, only: [:create]
   
 
@@ -21,6 +21,13 @@ class Api::User::OrdersController < ApplicationController
   def cancel
     current_api_user.orders.where(id: params[:ids])
                     .update_all(state: 'user_cancel')
+    @orders = current_api_user.orders.find(params[:ids])
+    render json: @orders
+  end
+
+  def success
+    current_api_user.orders.where(id: params[:ids])
+                    .update_all(state: 'user_success')
     @orders = current_api_user.orders.find(params[:ids])
     render json: @orders
   end
